@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.dgsd.android.uws.ShuttleTracker.BuildConfig;
 import com.dgsd.android.uws.ShuttleTracker.Util.OnGetMapViewListener;
+import com.dgsd.android.uws.ShuttleTracker.View.ClickableMyLocationOverlay;
 import com.google.android.maps.*;
 
 import java.util.ArrayList;
@@ -32,14 +33,14 @@ import java.util.List;
 /**
  * @author Daniel Grech
  */
-public class MapFragment extends SherlockFragment {
+public class MapFragment extends SherlockFragment implements ClickableMyLocationOverlay.OnCurrentLocationClickListener {
     private static final String TAG = MapFragment.class.getSimpleName();
 
     private OnGetMapViewListener mOnGetMapViewListener;
+    private ClickableMyLocationOverlay mCurrentLocationOverlay;
 
     public static MapFragment newInstance() {
-        MapFragment f = new MapFragment();
-        return f;
+        return new MapFragment();
     }
 
     @Override
@@ -60,6 +61,10 @@ public class MapFragment extends SherlockFragment {
             }
         }
 
+        mCurrentLocationOverlay = new ClickableMyLocationOverlay(getActivity(), mv);
+        mCurrentLocationOverlay.setOnCurrentLocationClickListener(this);
+        mv.getOverlays().add(mCurrentLocationOverlay);
+
         return mv;
     }
 
@@ -78,6 +83,8 @@ public class MapFragment extends SherlockFragment {
     @Override
     public void onActivityCreated(Bundle bundle) {
         super.onActivityCreated(bundle);
+
+        animateToCurrentLocation();
     }
 
     @Override
@@ -88,13 +95,28 @@ public class MapFragment extends SherlockFragment {
     @Override
     public void onResume() {
         super.onResume();
+        mCurrentLocationOverlay.enableMyLocation();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        mCurrentLocationOverlay.disableMyLocation();
     }
 
+    public void animateToCurrentLocation() {
+        final MapView mv = getMapView();
+        if(mv == null)
+            return;
+
+        final GeoPoint p = mCurrentLocationOverlay.getMyLocation();
+        if(p == null) {
+            mCurrentLocationOverlay.notifyNextLocationUpdate(true);
+            return;
+        }
+
+        mv.getController().animateTo(p);
+    }
 
     public void setOnGetMapViewListener(OnGetMapViewListener onGetMapViewListener) {
         this.mOnGetMapViewListener = onGetMapViewListener;
@@ -105,5 +127,15 @@ public class MapFragment extends SherlockFragment {
             return mOnGetMapViewListener.onGetMapView();
         else
             return ((OnGetMapViewListener) getActivity()).onGetMapView();
+    }
+
+    @Override
+    public void onCurrentLocationClick(GeoPoint location) {
+
+    }
+
+    @Override
+    public void onCurrentLocationLoaded(Location location) {
+        animateToCurrentLocation();
     }
 }
