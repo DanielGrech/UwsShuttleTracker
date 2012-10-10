@@ -26,13 +26,13 @@ public class Db extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DbTable.VEHICLE_READING.createSql());
-        db.execSQL(DbTable.STOP.createSql());
+        db.execSQL(DbTable.STOPS.createSql());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(DbTable.VEHICLE_READING.dropSql());
-        db.execSQL(DbTable.STOP.dropSql());
+        db.execSQL(DbTable.STOPS.dropSql());
     }
 }
 
