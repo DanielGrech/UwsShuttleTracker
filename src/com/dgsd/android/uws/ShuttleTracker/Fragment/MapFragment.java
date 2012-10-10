@@ -1,0 +1,109 @@
+package com.dgsd.android.uws.ShuttleTracker.Fragment;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.dgsd.android.uws.ShuttleTracker.BuildConfig;
+import com.dgsd.android.uws.ShuttleTracker.Util.OnGetMapViewListener;
+import com.google.android.maps.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * @author Daniel Grech
+ */
+public class MapFragment extends SherlockFragment {
+    private static final String TAG = MapFragment.class.getSimpleName();
+
+    private OnGetMapViewListener mOnGetMapViewListener;
+
+    public static MapFragment newInstance() {
+        MapFragment f = new MapFragment();
+        return f;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        MapView mv = getMapView();
+        if (mv != null && mv.getParent() != null && mv.getParent() instanceof ViewGroup) {
+            try {
+                //View already has a parent, better remove it!
+                ((ViewGroup) mv.getParent()).removeView(mv);
+            } catch (Exception e) {
+                if (BuildConfig.DEBUG)
+                    Log.e(TAG, "Error removing MapView from parent", e);
+            }
+        }
+
+        return mv;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (mOnGetMapViewListener != null) {
+            ViewGroup parent = (ViewGroup) mOnGetMapViewListener.onGetMapView().getParent();
+            if (parent != null) {
+                parent.removeView(mOnGetMapViewListener.onGetMapView());
+            }
+        }
+    }
+
+    @Override
+    public void onActivityCreated(Bundle bundle) {
+        super.onActivityCreated(bundle);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+
+    public void setOnGetMapViewListener(OnGetMapViewListener onGetMapViewListener) {
+        this.mOnGetMapViewListener = onGetMapViewListener;
+    }
+
+    private MapView getMapView() {
+        if (mOnGetMapViewListener != null)
+            return mOnGetMapViewListener.onGetMapView();
+        else
+            return ((OnGetMapViewListener) getActivity()).onGetMapView();
+    }
+}

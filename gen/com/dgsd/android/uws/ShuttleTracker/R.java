@@ -897,6 +897,7 @@ containing a value of this type.
         public static final int abs__title=0x7f04001b;
         public static final int abs__titleDivider=0x7f04001c;
         public static final int abs__up=0x7f04000b;
+        public static final int container=0x7f040027;
         public static final int disableHome=0x7f040009;
         public static final int homeAsUp=0x7f040006;
         public static final int listMode=0x7f040002;
@@ -932,9 +933,10 @@ containing a value of this type.
         public static final int abs__screen_action_bar_overlay=0x7f030011;
         public static final int abs__screen_simple=0x7f030012;
         public static final int abs__screen_simple_overlay_action_mode=0x7f030013;
-        public static final int main=0x7f030014;
-        public static final int sherlock_spinner_dropdown_item=0x7f030015;
-        public static final int sherlock_spinner_item=0x7f030016;
+        public static final int activity_with_single_fragment=0x7f030014;
+        public static final int main=0x7f030015;
+        public static final int sherlock_spinner_dropdown_item=0x7f030016;
+        public static final int sherlock_spinner_item=0x7f030017;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -968,6 +970,9 @@ containing a value of this type.
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f090009;
         public static final int app_name=0x7f09000a;
+        public static final int maps_api_key=0x7f09000d;
+        public static final int maps_api_key_debug=0x7f09000b;
+        public static final int maps_api_key_production=0x7f09000c;
     }
     public static final class style {
         public static final int ButtonShuttleTracker=0x7f0a005a;
