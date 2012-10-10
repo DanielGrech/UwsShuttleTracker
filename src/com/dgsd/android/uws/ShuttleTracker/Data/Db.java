@@ -27,6 +27,13 @@ public class Db extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DbTable.VEHICLE_READING.createSql());
         db.execSQL(DbTable.STOPS.createSql());
+
+        db.execSQL("CREATE TRIGGER delete_old_readings AFTER INSERT ON readings BEGIN " +
+                //We only keep the top 10,000 rows.
+                "DELETE FROM readings " +
+                "WHERE _id NOT IN (SELECT _id from readings ORDER BY time DESC LIMIT 10000); " +
+
+                "END;");
     }
 
     @Override
