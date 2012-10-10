@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.dgsd.android.uws.ShuttleTracker.BuildConfig;
+import com.dgsd.android.uws.ShuttleTracker.Service.ApiService;
 import com.dgsd.android.uws.ShuttleTracker.Util.OnGetMapViewListener;
 import com.dgsd.android.uws.ShuttleTracker.View.ClickableMyLocationOverlay;
 import com.google.android.maps.*;
@@ -36,8 +37,11 @@ import java.util.List;
 public class MapFragment extends SherlockFragment implements ClickableMyLocationOverlay.OnCurrentLocationClickListener {
     private static final String TAG = MapFragment.class.getSimpleName();
 
+    private static final int HANDLER_DELAY = 1000 * 60; // Every minute!
+
     private OnGetMapViewListener mOnGetMapViewListener;
     private ClickableMyLocationOverlay mCurrentLocationOverlay;
+    private Handler mHandler;
 
     public static MapFragment newInstance() {
         return new MapFragment();
@@ -46,6 +50,16 @@ public class MapFragment extends SherlockFragment implements ClickableMyLocation
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(getActivity() != null && MapFragment.this.isResumed())
+                    ApiService.requestVehicleReading(getActivity());
+
+                mHandler.postDelayed(this, HANDLER_DELAY);
+            }
+        }, HANDLER_DELAY);
     }
 
     @Override
@@ -83,6 +97,8 @@ public class MapFragment extends SherlockFragment implements ClickableMyLocation
     @Override
     public void onActivityCreated(Bundle bundle) {
         super.onActivityCreated(bundle);
+
+        ApiService.requestVehicleReading(getActivity());
 
         animateToCurrentLocation();
     }
