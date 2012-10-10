@@ -24,14 +24,14 @@
     </style>
 
     <style name="shuttle_tracker_ActionBar" parent="@style/Widget.Sherlock.ActionBar.Solid">
-        <item name="background">#CC000000</item>
-        <item name="backgroundStacked">#CC000000</item>
-        <item name="backgroundSplit">#CC000000</item>
+        <item name="background">#CC1e589f</item>
+        <item name="backgroundStacked">#CC1e589f</item>
+        <item name="backgroundSplit">#CC1e589f</item>
         <item name="progressBarStyle">@style/shuttle_tracker_ProgressBar</item>
 
-        <item name="android:background">#CC000000</item>
-        <item name="android:backgroundStacked">#CC000000</item>
-        <item name="android:backgroundSplit">#CC000000</item>
+        <item name="android:background">#CC1e589f</item>
+        <item name="android:backgroundStacked">#CC1e589f</item>
+        <item name="android:backgroundSplit">#CC1e589f</item>
         <item name="android:progressBarStyle">@style/shuttle_tracker_ProgressBar</item>
     </style>
 
