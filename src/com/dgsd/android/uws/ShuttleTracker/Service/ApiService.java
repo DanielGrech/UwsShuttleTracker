@@ -37,7 +37,6 @@ public class ApiService extends IntentService {
                     if(busStops == null || busStops.isEmpty()) {
                         broadcast(requestType, ResultType.ERROR);
                     } else {
-                        final long currentMillis = System.currentTimeMillis();
                         final ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>(busStops.size());
                         for(BusStop stop : busStops) {
                             if(stop.location == null || !stop.location.isValid())
