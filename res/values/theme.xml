@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Theme.shuttle_tracker_base" parent="@style/Theme.Sherlock">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+
+        <item name="actionBarItemBackground">@drawable/selectable_background_shuttle_tracker</item>
+        <item name="popupMenuStyle">@style/shuttle_tracker_PopupMenu</item>
+        <item name="dropDownListViewStyle">@style/shuttle_tracker_DropDownListView</item>
+        <item name="actionBarTabStyle">@style/shuttle_tracker_ActionBarTabStyle</item>
+        <item name="actionDropDownStyle">@style/shuttle_tracker_DropDownNav</item>
+        <item name="actionBarStyle">@style/shuttle_tracker_ActionBar</item>
+
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_shuttle_tracker</item>
+        <item name="android:popupMenuStyle">@style/shuttle_tracker_PopupMenu</item>
+        <item name="android:dropDownListViewStyle">@style/shuttle_tracker_DropDownListView</item>
+        <item name="android:actionBarTabStyle">@style/shuttle_tracker_ActionBarTabStyle</item>
+        <item name="android:actionDropDownStyle">@style/shuttle_tracker_DropDownNav</item>
+        <item name="android:actionBarStyle">@style/shuttle_tracker_ActionBar</item>
+        <item name="android:panelBackground">@drawable/menu_hardkey_panel_shuttle_tracker</item>
+    </style>
+
+    <style name="shuttle_tracker_ActionBar" parent="@style/Widget.Sherlock.ActionBar.Solid">
+        <item name="background">#CC000000</item>
+        <item name="backgroundStacked">#CC000000</item>
+        <item name="backgroundSplit">#CC000000</item>
+        <item name="progressBarStyle">@style/shuttle_tracker_ProgressBar</item>
+
+        <item name="android:background">#CC000000</item>
+        <item name="android:backgroundStacked">#CC000000</item>
+        <item name="android:backgroundSplit">#CC000000</item>
+        <item name="android:progressBarStyle">@style/shuttle_tracker_ProgressBar</item>
+    </style>
+
+    <style name="shuttle_tracker_PopupMenu" parent="@style/Widget.Sherlock.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_shuttle_tracker</item>
+    </style>
+
+    <style name="shuttle_tracker_DropDownListView" parent="@style/Widget.Sherlock.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_shuttle_tracker</item>
+    </style>
+
+    <style name="shuttle_tracker_ActionBarTabStyle" parent="@style/Widget.Sherlock.ActionBar.TabView">
+        <item name="background">@drawable/tab_indicator_ab_shuttle_tracker</item>
+
+        <item name="android:background">@drawable/tab_indicator_ab_shuttle_tracker</item>
+    </style>
+
+    <style name="shuttle_tracker_DropDownNav" parent="@style/Widget.Sherlock.Spinner.DropDown.ActionBar">
+        <item name="background">@drawable/spinner_background_ab_shuttle_tracker</item>
+
+        <item name="android:background">@drawable/spinner_background_ab_shuttle_tracker</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_shuttle_tracker</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_shuttle_tracker</item>
+    </style>
+
+    <style name="shuttle_tracker_ProgressBar" parent="@style/Widget.Sherlock.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_shuttle_tracker</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.shuttle_tracker.widget" parent="@style/Theme.Sherlock">
+        <item name="popupMenuStyle">@style/shuttle_tracker_PopupMenu</item>
+        <item name="dropDownListViewStyle">@style/shuttle_tracker_DropDownListView</item>
+
+        <item name="android:popupMenuStyle">@style/shuttle_tracker_PopupMenu</item>
+        <item name="android:dropDownListViewStyle">@style/shuttle_tracker_DropDownListView</item>
+    </style>
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="shuttle_tracker_DropDownItem" parent="@style/Widget.Sherlock.Light.DropDownItem.Spinner">
+        <item name="android:textAppearance">?android:attr/textAppearanceInverse</item>
+    </style>
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="shuttle_tracker_SpinnerItem" parent="@style/Widget.Sherlock.TextView.SpinnerItem">
+        <item name="android:textAppearance">?android:attr/textAppearanceInverse</item>
+    </style>
+
+
+  <style name="Theme.ShuttleTracker" parent="Theme.shuttle_tracker_base">
+
+    <item name="android:editTextStyle">@style/EditTextShuttleTracker</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxShuttleTracker</item>
+
+    <item name="android:buttonStyle">@style/ButtonShuttleTracker</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonShuttleTracker</item>
+
+    <item name="android:spinnerStyle">@style/SpinnerShuttleTracker</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/SpinnerShuttleTracker.DropDown</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerItemShuttleTracker</item>
+
+    <item name="android:listViewStyle">@style/ListViewShuttleTracker</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewShuttleTracker.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemShuttleTracker</item>
+
+  </style>
+
+</resources>
