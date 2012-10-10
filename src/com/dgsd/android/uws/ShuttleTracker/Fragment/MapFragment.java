@@ -10,6 +10,7 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.renderscript.RenderScript;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -21,6 +22,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.dgsd.android.uws.ShuttleTracker.BuildConfig;
+import com.dgsd.android.uws.ShuttleTracker.Data.DbField;
+import com.dgsd.android.uws.ShuttleTracker.Data.Provider;
 import com.dgsd.android.uws.ShuttleTracker.Service.ApiService;
 import com.dgsd.android.uws.ShuttleTracker.Util.OnGetMapViewListener;
 import com.dgsd.android.uws.ShuttleTracker.View.ClickableMyLocationOverlay;
@@ -34,8 +37,11 @@ import java.util.List;
 /**
  * @author Daniel Grech
  */
-public class MapFragment extends SherlockFragment implements ClickableMyLocationOverlay.OnCurrentLocationClickListener {
+public class MapFragment extends SherlockFragment implements ClickableMyLocationOverlay.OnCurrentLocationClickListener, LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = MapFragment.class.getSimpleName();
+
+    public static final int LOADER_ID_STOPS = 0x01;
+    public static final int LOADER_ID_READINGS = 0x02;
 
     private static final int HANDLER_DELAY = 1000 * 60; // Every minute!
 
@@ -101,6 +107,8 @@ public class MapFragment extends SherlockFragment implements ClickableMyLocation
         ApiService.requestVehicleReading(getActivity());
 
         animateToCurrentLocation();
+
+        getLoaderManager().initLoader(LOADER_ID_READINGS, null, this);
     }
 
     @Override
@@ -118,6 +126,30 @@ public class MapFragment extends SherlockFragment implements ClickableMyLocation
     public void onPause() {
         super.onPause();
         mCurrentLocationOverlay.disableMyLocation();
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
+        switch(id) {
+            case LOADER_ID_READINGS:
+                final Uri uri = Provider.READINGS_URI.buildUpon()
+                    .appendQueryParameter(Provider.QUERY_PARAMETER_LIMIT, "1")
+                    .build();
+                return new CursorLoader(getActivity(), uri, null, null, null, DbField.TIME + " DESC");
+            case LOADER_ID_STOPS:
+                return null;
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        //TODO!
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
     }
 
     public void animateToCurrentLocation() {

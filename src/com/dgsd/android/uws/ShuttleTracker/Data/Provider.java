@@ -17,6 +17,8 @@ import java.sql.SQLException;
 public class Provider extends ContentProvider {
     private static final String TAG = Provider.class.getSimpleName();
 
+    public static final String QUERY_PARAMETER_LIMIT = "limit";
+
     public static final String AUTHORITY = "com.dgsd.android.uws.Data.Provider";
     private static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY);
 
@@ -74,7 +76,8 @@ public class Provider extends ContentProvider {
                     throw new IllegalArgumentException("Unknown URI: " + uri);
             }
 
-            Cursor cursor = qb.query(mDb.getReadableDatabase(), proj, sel, selArgs, null, null, sort, null);
+            final String limit = uri.getQueryParameter(QUERY_PARAMETER_LIMIT);
+            Cursor cursor = qb.query(mDb.getReadableDatabase(), proj, sel, selArgs, null, null, sort, limit);
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
 
             return cursor;
