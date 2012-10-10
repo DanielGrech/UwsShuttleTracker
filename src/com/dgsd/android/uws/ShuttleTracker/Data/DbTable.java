@@ -10,7 +10,8 @@ public class DbTable {
             DbField.ID,
             DbField.NAME,
             DbField.LAT,
-            DbField.LON
+            DbField.LON,
+            DbField.TIME
     });
 
     public static final DbTable STOPS = new DbTable("stops", new DbField[] {

@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class Provider extends ContentProvider {
     private static final String TAG = Provider.class.getSimpleName();
 
-    public static final String AUTHORITY = "com.dgsd.android.CheerMeOn.Data.Provider";
+    public static final String AUTHORITY = "com.dgsd.android.uws.Data.Provider";
     private static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY);
 
     private static final UriMatcher mURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);

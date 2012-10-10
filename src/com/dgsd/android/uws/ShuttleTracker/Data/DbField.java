@@ -10,6 +10,7 @@ public class DbField {
     public static final DbField CAMPUS = new DbField("_campus", "text");
     public static final DbField LAT = new DbField("_lat", "real");
     public static final DbField LON = new DbField("_lon", "real");
+    public static final DbField TIME = new DbField("_time", "integer");
 
 
     public String name;
