@@ -8,7 +8,6 @@ import com.actionbarsherlock.view.MenuItem;
 import com.cyrilmottier.polaris.PolarisMapView;
 import com.dgsd.android.uws.ShuttleTracker.Fragment.MapFragment;
 import com.dgsd.android.uws.ShuttleTracker.Util.OnGetMapViewListener;
-import com.google.android.maps.MapView;
 
 public class MainActivity extends SherlockFragmentActivity implements OnGetMapViewListener {
     private static final String KEY_MAP_FRAGMENT = "_map_fragment";
@@ -35,7 +34,7 @@ public class MainActivity extends SherlockFragmentActivity implements OnGetMapVi
 
 
     @Override
-    public MapView onGetMapView() {
+    public PolarisMapView onGetMapView() {
         if(mMapView == null) {
             mMapView = new PolarisMapView(this, getResources().getString(R.string.maps_api_key));
             mMapView.getController().setZoom(15);

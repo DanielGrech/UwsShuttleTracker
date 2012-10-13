@@ -26,15 +26,18 @@ public class Provider extends ContentProvider {
 
     public static final int READINGS = 0x1;
     public static final int STOPS = 0x2;
+    public static final int LATEST = 0x3;
 
     public static final Uri READINGS_URI = Uri.withAppendedPath(BASE_URI, "readings");
     public static final Uri STOPS_URI = Uri.withAppendedPath(BASE_URI, "stops");
+    public static final Uri LATEST_READINGS_URI = Uri.withAppendedPath(BASE_URI, "latest");
 
     private Db mDb;
 
     static {
         mURIMatcher.addURI(AUTHORITY, "readings", READINGS);
         mURIMatcher.addURI(AUTHORITY, "stops", STOPS);
+        mURIMatcher.addURI(AUTHORITY, "latest", LATEST);
     }
 
     @Override
@@ -66,6 +69,10 @@ public class Provider extends ContentProvider {
             SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
             switch (type) {
+                case LATEST:
+                    qb.setTables(DbTable.VEHICLE_READING.name);
+                    qb.appendWhere("_id in (select max(_id) from readings group by _name)");
+                    break;
                 case READINGS:
                     qb.setTables(DbTable.VEHICLE_READING.name);
                     break;
@@ -110,7 +117,13 @@ public class Provider extends ContentProvider {
             long id = db.replaceOrThrow(table, null, values);
             if (id > 0) {
                 Uri newUri = ContentUris.withAppendedId(uri, id);
-                getContext().getContentResolver().notifyChange(uri, null);
+
+                if(uri == READINGS_URI || uri == LATEST_READINGS_URI) {
+                    getContext().getContentResolver().notifyChange(READINGS_URI, null);
+                    getContext().getContentResolver().notifyChange(LATEST_READINGS_URI, null);
+                } else {
+                    getContext().getContentResolver().notifyChange(uri, null);
+                }
                 return newUri;
             } else {
                 throw new SQLException("Failed to insert row into " + uri);
