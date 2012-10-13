@@ -902,7 +902,7 @@ containing a value of this type.
         public static final int textfield_focused_holo_dark=0x7f0200bd;
     }
     public static final class id {
-        public static final int about=0x7f06002f;
+        public static final int about=0x7f060032;
         public static final int abs__action_bar=0x7f060022;
         public static final int abs__action_bar_container=0x7f060021;
         public static final int abs__action_bar_subtitle=0x7f060011;
@@ -932,23 +932,26 @@ containing a value of this type.
         public static final int abs__title=0x7f06001b;
         public static final int abs__titleDivider=0x7f06001c;
         public static final int abs__up=0x7f06000b;
-        public static final int container=0x7f060027;
+        public static final int container=0x7f06002a;
         public static final int disableHome=0x7f060009;
-        public static final int filters=0x7f06002e;
+        public static final int filters=0x7f060031;
         public static final int homeAsUp=0x7f060006;
         public static final int listMode=0x7f060002;
+        public static final int list_container=0x7f060029;
+        public static final int map_container=0x7f060028;
         public static final int normal=0x7f060001;
-        public static final int polaris__callout=0x7f060028;
-        public static final int polaris__content=0x7f06002a;
-        public static final int polaris__content_container=0x7f060029;
-        public static final int polaris__disclosure=0x7f06002d;
-        public static final int polaris__subtitle=0x7f06002c;
-        public static final int polaris__title=0x7f06002b;
+        public static final int polaris__callout=0x7f06002b;
+        public static final int polaris__content=0x7f06002d;
+        public static final int polaris__content_container=0x7f06002c;
+        public static final int polaris__disclosure=0x7f060030;
+        public static final int polaris__subtitle=0x7f06002f;
+        public static final int polaris__title=0x7f06002e;
         public static final int showCustom=0x7f060008;
         public static final int showHome=0x7f060005;
         public static final int showTitle=0x7f060007;
         public static final int tabMode=0x7f060003;
         public static final int useLogo=0x7f060004;
+        public static final int view_flipper=0x7f060027;
         public static final int wrap_content=0x7f060000;
     }
     public static final class integer {
@@ -979,12 +982,13 @@ containing a value of this type.
         public static final int abs__screen_action_bar_overlay=0x7f030011;
         public static final int abs__screen_simple=0x7f030012;
         public static final int abs__screen_simple_overlay_action_mode=0x7f030013;
-        public static final int activity_with_single_fragment=0x7f030014;
-        public static final int main=0x7f030015;
-        public static final int polaris__map_callout_view_merge=0x7f030016;
-        public static final int polaris__user_tracking_button=0x7f030017;
-        public static final int sherlock_spinner_dropdown_item=0x7f030018;
-        public static final int sherlock_spinner_item=0x7f030019;
+        public static final int activity_main=0x7f030014;
+        public static final int activity_with_single_fragment=0x7f030015;
+        public static final int main=0x7f030016;
+        public static final int polaris__map_callout_view_merge=0x7f030017;
+        public static final int polaris__user_tracking_button=0x7f030018;
+        public static final int sherlock_spinner_dropdown_item=0x7f030019;
+        public static final int sherlock_spinner_item=0x7f03001a;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;

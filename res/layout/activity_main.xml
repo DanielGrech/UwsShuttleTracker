@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <FrameLayout
+            android:id="@+id/map_container"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/list_container"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+        </FrameLayout>
+    </ViewFlipper>
+</FrameLayout>
