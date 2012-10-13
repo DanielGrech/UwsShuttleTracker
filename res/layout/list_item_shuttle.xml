@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:padding="8dip"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="8dip"
+        android:gravity="left|center_vertical"
+        android:textSize="20sp"
+        android:singleLine="true"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#1C6FAA"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/name"
+        android:paddingLeft="8dip"
+        android:gravity="left|center_vertical"
+        android:textSize="14sp"
+        android:singleLine="false"
+        android:ellipsize="end"
+        android:textColor="#999999"/>
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/time"
+        android:paddingLeft="8dip"
+        android:gravity="left|center_vertical"
+        android:textSize="14sp"
+        android:singleLine="false"
+        android:ellipsize="end"
+        android:textColor="#999999"/>
+
+</RelativeLayout>

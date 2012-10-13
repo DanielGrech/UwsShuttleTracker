@@ -42,6 +42,7 @@ public class MapFragment extends SherlockFragment implements LoaderManager.Loade
 
     private OnGetMapViewListener mOnGetMapViewListener;
     private Handler mHandler;
+    private List<Annotation> mAnnotations = new ArrayList<Annotation>();
 
     public static MapFragment newInstance() {
         return new MapFragment();
@@ -120,7 +121,7 @@ public class MapFragment extends SherlockFragment implements LoaderManager.Loade
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        List<Annotation> annotations = new ArrayList<Annotation>();
+        mAnnotations.clear();
         if(cursor != null && cursor.moveToFirst()) {
             final int nameCol = cursor.getColumnIndex(DbField.NAME.name);
             final int latCol = cursor.getColumnIndex(DbField.LAT.name);
@@ -136,7 +137,7 @@ public class MapFragment extends SherlockFragment implements LoaderManager.Loade
                         DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_TIME);
                 final GeoPoint p = new GeoPoint((int) (lat * 1E6), (int) (lon * 1E6));
 
-                annotations.add(new Annotation(p, name, subtitle));
+                mAnnotations.add(new Annotation(p, name, subtitle));
             } while(cursor.moveToNext());
 
             final PolarisMapView mv = getMapView();
@@ -146,7 +147,7 @@ public class MapFragment extends SherlockFragment implements LoaderManager.Loade
             if(mv.getChildCount() > 1)
                 mv.removeViewAt(0);
 
-            mv.setAnnotations(annotations, R.drawable.map_marker_bus);
+            mv.setAnnotations(mAnnotations, R.drawable.map_marker_bus);
         }
     }
 
@@ -198,5 +199,24 @@ public class MapFragment extends SherlockFragment implements LoaderManager.Loade
             if(BuildConfig.DEBUG)
                 Log.w(TAG, "Couldnt find street view activity", e);
         }
+    }
+
+    public void selectAnnotationAt(final GeoPoint p) {
+        final PolarisMapView mv = getMapView();
+        mv.getController().setZoom(18);
+        mv.getController().animateTo(p, new Runnable() {
+            @Override
+            public void run() {
+                if(mAnnotations == null || mAnnotations.isEmpty())
+                    return;
+
+                for(int i = 0, size = mAnnotations.size(); i < size; i++) {
+                    if(mAnnotations.get(i).getPoint().equals(p)) {
+                        mv.setSelectedAnnotation(i);
+                        return;
+                    }
+                }
+            }
+        });
     }
 }
