@@ -4,9 +4,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="Theme.shuttle_tracker_base" parent="@style/Theme.Sherlock">
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="windowActionBarOverlay">true</item>
-
         <item name="actionBarItemBackground">@drawable/selectable_background_shuttle_tracker</item>
         <item name="popupMenuStyle">@style/shuttle_tracker_PopupMenu</item>
         <item name="dropDownListViewStyle">@style/shuttle_tracker_DropDownListView</item>
@@ -24,14 +21,14 @@
     </style>
 
     <style name="shuttle_tracker_ActionBar" parent="@style/Widget.Sherlock.ActionBar.Solid">
-        <item name="background">#CC1e589f</item>
-        <item name="backgroundStacked">#CC1e589f</item>
-        <item name="backgroundSplit">#CC1e589f</item>
+        <item name="background">@drawable/ab_solid_shuttle_tracker</item>
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_shuttle_tracker</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_shuttle_tracker</item>
         <item name="progressBarStyle">@style/shuttle_tracker_ProgressBar</item>
 
-        <item name="android:background">#CC1e589f</item>
-        <item name="android:backgroundStacked">#CC1e589f</item>
-        <item name="android:backgroundSplit">#CC1e589f</item>
+        <item name="android:background">@drawable/ab_solid_shuttle_tracker</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_shuttle_tracker</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_shuttle_tracker</item>
         <item name="android:progressBarStyle">@style/shuttle_tracker_ProgressBar</item>
     </style>
 

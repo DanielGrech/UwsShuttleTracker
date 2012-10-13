@@ -40,6 +40,7 @@
     <orderEntry type="jdk" jdkName="Android 4.1 Google APIs" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ActionBarSherlock" />
+    <orderEntry type="module" module-name="Polaris" />
   </component>
 </module>
 

@@ -1,19 +1,19 @@
 package com.dgsd.android.uws.ShuttleTracker;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.cyrilmottier.polaris.PolarisMapView;
 import com.dgsd.android.uws.ShuttleTracker.Fragment.MapFragment;
 import com.dgsd.android.uws.ShuttleTracker.Util.OnGetMapViewListener;
-import com.dgsd.android.uws.ShuttleTracker.View.DoubleTapMapView;
 import com.google.android.maps.MapView;
 
 public class MainActivity extends SherlockFragmentActivity implements OnGetMapViewListener {
     private static final String KEY_MAP_FRAGMENT = "_map_fragment";
 
-    protected MapView mMapView;
+    protected PolarisMapView mMapView;
     private MapFragment mMapFragment;
 
     @Override
@@ -37,10 +37,10 @@ public class MainActivity extends SherlockFragmentActivity implements OnGetMapVi
     @Override
     public MapView onGetMapView() {
         if(mMapView == null) {
-            mMapView = new DoubleTapMapView(this, getResources().getString(R.string.maps_api_key));
-            mMapView.setClickable(true);
-            mMapView.setBuiltInZoomControls(false);
+            mMapView = new PolarisMapView(this, getResources().getString(R.string.maps_api_key));
             mMapView.getController().setZoom(15);
+            mMapView.setUserTrackingButtonEnabled(true);
+            mMapView.setCurrentLocationMarker("Current location", null);
         }
 
         return mMapView;
@@ -49,8 +49,21 @@ public class MainActivity extends SherlockFragmentActivity implements OnGetMapVi
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
         if (mMapFragment != null && mMapFragment.isAdded())
             getSupportFragmentManager().putFragment(outState, KEY_MAP_FRAGMENT, mMapFragment);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

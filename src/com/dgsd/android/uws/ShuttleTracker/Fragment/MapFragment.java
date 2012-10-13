@@ -1,43 +1,29 @@
 package com.dgsd.android.uws.ShuttleTracker.Fragment;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.renderscript.RenderScript;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.dgsd.android.uws.ShuttleTracker.BuildConfig;
 import com.dgsd.android.uws.ShuttleTracker.Data.DbField;
 import com.dgsd.android.uws.ShuttleTracker.Data.Provider;
 import com.dgsd.android.uws.ShuttleTracker.Service.ApiService;
 import com.dgsd.android.uws.ShuttleTracker.Util.OnGetMapViewListener;
-import com.dgsd.android.uws.ShuttleTracker.View.ClickableMyLocationOverlay;
 import com.google.android.maps.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author Daniel Grech
  */
-public class MapFragment extends SherlockFragment implements ClickableMyLocationOverlay.OnCurrentLocationClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+public class MapFragment extends SherlockFragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = MapFragment.class.getSimpleName();
 
     public static final int LOADER_ID_STOPS = 0x01;
@@ -46,7 +32,6 @@ public class MapFragment extends SherlockFragment implements ClickableMyLocation
     private static final int HANDLER_DELAY = 1000 * 60; // Every minute!
 
     private OnGetMapViewListener mOnGetMapViewListener;
-    private ClickableMyLocationOverlay mCurrentLocationOverlay;
     private Handler mHandler;
 
     public static MapFragment newInstance() {
@@ -81,10 +66,6 @@ public class MapFragment extends SherlockFragment implements ClickableMyLocation
             }
         }
 
-        mCurrentLocationOverlay = new ClickableMyLocationOverlay(getActivity(), mv);
-        mCurrentLocationOverlay.setOnCurrentLocationClickListener(this);
-        mv.getOverlays().add(mCurrentLocationOverlay);
-
         return mv;
     }
 
@@ -106,8 +87,6 @@ public class MapFragment extends SherlockFragment implements ClickableMyLocation
 
         ApiService.requestVehicleReading(getActivity());
 
-        animateToCurrentLocation();
-
         getLoaderManager().initLoader(LOADER_ID_READINGS, null, this);
     }
 
@@ -117,21 +96,11 @@ public class MapFragment extends SherlockFragment implements ClickableMyLocation
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mCurrentLocationOverlay.enableMyLocation();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mCurrentLocationOverlay.disableMyLocation();
-    }
-
-    @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
         switch(id) {
             case LOADER_ID_READINGS:
+                //TODO: Proper query: select * from readings where _id in (select max(_id) from readings group by _name);
+
                 final Uri uri = Provider.READINGS_URI.buildUpon()
                     .appendQueryParameter(Provider.QUERY_PARAMETER_LIMIT, "1")
                     .build();
@@ -152,20 +121,6 @@ public class MapFragment extends SherlockFragment implements ClickableMyLocation
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
     }
 
-    public void animateToCurrentLocation() {
-        final MapView mv = getMapView();
-        if(mv == null)
-            return;
-
-        final GeoPoint p = mCurrentLocationOverlay.getMyLocation();
-        if(p == null) {
-            mCurrentLocationOverlay.notifyNextLocationUpdate(true);
-            return;
-        }
-
-        mv.getController().animateTo(p);
-    }
-
     public void setOnGetMapViewListener(OnGetMapViewListener onGetMapViewListener) {
         this.mOnGetMapViewListener = onGetMapViewListener;
     }
@@ -175,15 +130,5 @@ public class MapFragment extends SherlockFragment implements ClickableMyLocation
             return mOnGetMapViewListener.onGetMapView();
         else
             return ((OnGetMapViewListener) getActivity()).onGetMapView();
-    }
-
-    @Override
-    public void onCurrentLocationClick(GeoPoint location) {
-
-    }
-
-    @Override
-    public void onCurrentLocationLoaded(Location location) {
-        animateToCurrentLocation();
     }
 }

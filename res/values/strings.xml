@@ -5,4 +5,8 @@
     <string name="maps_api_key_debug">0jZhYLWjLGQmDOiZQ6syVhSAEu5DSNj3EPb0kQQ</string>
     <string name="maps_api_key_production">0JVCDncbzRBCYFB_H1QExKE0UV28xO5SOpus0tA</string>
     <string name="maps_api_key">@string/maps_api_key_debug</string>
+
+    <string name="about">About</string>
+    <string name="campuses">Campuses</string>
+    <string name="current_location">Current Location</string>
 </resources>
